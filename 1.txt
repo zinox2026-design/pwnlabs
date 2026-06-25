@@ -1,0 +1,22 @@
+cat << 'EOF' > source.c
+#include <stdio.h>
+#include <string.h>
+
+__attribute__((section(".hidden_c2"))) char c2_url[] = "http://bad-hacker.com/payload.exe";
+
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        printf("Error: Missing execution key.\n");
+        return 1;
+    }
+
+    if (strcmp(argv[1], "Sup3r_S3cr3t_K3y") == 0) {
+        printf("Key Accepted! Connecting to: %s\n", c2_url);
+    } else {
+        printf("Invalid Key!\n");
+    }
+    return 0;
+}
+EOF
+
+gcc source.c -o malware.bin -s

@@ -1,0 +1,26 @@
+cat << 'EOF' > vault.c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int user_pin;
+    printf("[-] Secure Vault Locked.\n");
+    printf("[?] Enter 4-digit PIN: ");
+    
+    // استقبال الرقم من المستخدم
+    scanf("%d", &user_pin);
+
+    // المقارنة برقم سري (4919) والذي يمثل 0x1337 بالسداسي عشر
+    if (user_pin == 4919) {
+        printf("\n[+] ACCESS GRANTED! System Unlocked.\n");
+        printf("[+] Secret Flag: pwn{dyn4m1c_4n4lys1s_r0cks}\n");
+    } else {
+        printf("\n[!] ACCESS DENIED! Alarm Triggered!\n");
+    }
+    
+    return 0;
+}
+EOF
+
+# تجميع الملف بشكل طبيعي
+gcc vault.c -o vault
