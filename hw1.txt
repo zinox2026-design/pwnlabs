@@ -1,0 +1,24 @@
+cat << 'EOF' > secure_door.c
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char password[30];
+    printf("[-] Secure Door Locked.\n");
+    printf("[?] Enter Password: ");
+    scanf("%29s", password);
+
+    // المقارنة بكلمة مرور معقدة
+    if (strcmp(password, "V3ry_C0mpl3x_P4ssw0rd_1337") == 0) {
+        printf("\n[+] ACCESS GRANTED! Welcome Admin.\n");
+        printf("[+] Secret Flag: pwn{b1n4ry_p4tch1ng_m4st3r}\n");
+    } else {
+        printf("\n[!] ACCESS DENIED! Intruder Detected!\n");
+    }
+    
+    return 0;
+}
+EOF
+
+# تجميع الملف
+gcc secure_door.c -o secure_door
